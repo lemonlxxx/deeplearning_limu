@@ -169,3 +169,11 @@ num_epochs = 10
 train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs, updater)
 train_data, train_targets = iter(train_iter).next()
 show_fashion_mnist(train_data[0:10], train_targets[0:10])
+
+
+
+X, y = iter(test_iter).next()
+true_labels = get_fashion_mnist_labels(y.numpy())
+pred_labels = get_fashion_mnist_labels(net(X).argmax(dim=1).numpy())
+titles = [true + '\n' + pred for true, pred in zip(true_labels, pred_labels)]
+show_fashion_mnist(X[0:9], titles[0:9])
